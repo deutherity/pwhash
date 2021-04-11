@@ -1,3 +1,6 @@
 [submodule "pwdgen"]
 	path = pwdgen
 	url = https://github.com/deutherity/pwdgen
+[submodule "findconfdir"]
+	path = findconfdir
+	url = https://github.com/deutherity/findconfdir

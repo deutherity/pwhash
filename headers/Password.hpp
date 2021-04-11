@@ -1,22 +1,42 @@
-#include "const.hpp"
+#pragma once
+#include <ostream>
+#include <istream>
+#include <string_view>
 #include <string>
-class Password
+#include "const_pwhash.hpp"
+
+template <typename CharT = char>
+struct Password
 {
 private:
-    std::string service;
-    std::string login;
-    int number;
-    std::string comment;
-    int salt_len;
-    uchar salt;
+    uchar *m_seed = nullptr;
 public:
+    typedef std::basic_string<CharT> str_t;
+    str_t m_service;
+    std::size_t m_seedlen = 0;
+    int m_id = -1;
+    str_t m_description;
+
+    Password() = default;
+    Password(   str_t &&service,
+                const int id,
+                str_t &&description = ""
+            );
+    Password(Password && other) noexcept = default;
+    Password(const Password & other) = default;
     ~Password();
+
+    const uchar *getSeed() const;
+    void setSeed(const uchar * t_seed, const std::size_t t_seedlen);
+    void moveSeed(uchar * t_seed, const std::size_t t_seedlen);
+    bool valid() const {return m_id != -1;}
+    std::string cook(const std::string_view &realpwd) const {return "pog";}
+
 };
 
-Password::Password()
-{
-}
 
-Password::~Password()
-{
-}
+template<typename CharT>
+std::basic_istream<CharT> & operator >> (std::basic_istream<CharT> &input, const Password<CharT> &that);
+
+template<typename CharT>
+std::basic_ostream<CharT> & operator << (std::basic_ostream<CharT> &output, const Password<CharT> &that);
