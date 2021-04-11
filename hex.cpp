@@ -1,7 +1,6 @@
 #include "hex.hpp"
 
-hexByte hex(const unsigned char x)
-{
+hexByte hex(const unsigned char x) {
     hexByte res;
     unsigned char first(x / 16);
     unsigned char last(x % 16);
@@ -10,7 +9,7 @@ hexByte hex(const unsigned char x)
     return res;
 }
 
-unsigned char unhex(const char *in)
-{
-    return 16 * ((in[0]-48) - (in[0] > 64) * 7) + ((in[1]-48) - (in[1] > 64) * 7);
+unsigned char unhex(const char *in) {
+    return 16 * ((in[0] - 48) - (in[0] > 64) * 7) +
+           ((in[1] - 48) - (in[1] > 64) * 7);
 }

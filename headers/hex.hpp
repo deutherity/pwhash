@@ -1,8 +1,7 @@
 #pragma once
 #include <cstdint>
 
-struct hexByte
-{
+struct hexByte {
     char h;
     char t;
 };
