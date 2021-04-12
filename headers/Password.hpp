@@ -18,10 +18,12 @@ template <typename CharT = char> struct Password {
 
     Password() = default;
     Password(str_t &&service, const int id, str_t &&description = "");
-    Password(Password &&other) noexcept = default;
+    Password(Password &&other) noexcept;
     Password(const Password &other) = default;
     ~Password();
 
+    Password &operator=(Password<CharT> &&other) noexcept;
+    Password &operator=(const Password<CharT> &other) = default;
     const uchar *getSeed() const;
     void setSeed(const uchar *t_seed, const std::size_t t_seedlen);
     void moveSeed(uchar *t_seed, const std::size_t t_seedlen);

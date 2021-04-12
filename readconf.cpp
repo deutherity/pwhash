@@ -1,14 +1,11 @@
-#include "Password.hpp"
+#include "readconf.hpp"
 #include "crash.hpp"
 #include "findconfdir.hpp"
 #include "templates.hpp"
 #include <filesystem>
 #include <fstream>
-#include <memory>
-#include <vector>
-namespace fs = std::filesystem;
 
-template <typename CharT> using passvec = std::vector<Password<CharT>>;
+namespace fs = std::filesystem;
 
 template <typename CharT = char> passvec<CharT> readconf() {
     using res_t = passvec<CharT>;

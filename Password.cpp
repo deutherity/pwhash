@@ -9,20 +9,28 @@ Password<CharT>::Password(str_t &&service, const int id, str_t &&description)
     : m_service(std::move(service)), m_id(id),
       m_description(std::move(description)) {}
 
-/*
 template <typename CharT>
-Password<CharT>::Password(Password<CharT> && other) noexcept :
-        m_service(std::move(other.m_service)),
-        m_seed(other.m_seed),
-        m_seedlen(other.m_seedlen),
-        m_description(std::move(other.m_description)),
-        m_id(other.m_id)
-    {
-        other.m_seed = nullptr;
-        other.m_seedlen = 0;
-        other.m_id = -1;
-    }
+Password<CharT> &Password<CharT>::operator=(Password<CharT> &&other) noexcept {
+    m_service = std::move(other.m_service);
+    m_seed = other.m_seed;
+    m_seedlen = other.m_seedlen;
+    m_description = std::move(other.m_description);
+    m_id = other.m_id;
+    other.m_seed = nullptr;
+    other.m_seedlen = 0;
+    other.m_id = -1;
+}
 
+template <typename CharT>
+Password<CharT>::Password(Password<CharT> &&other) noexcept
+    : m_service(std::move(other.m_service)), m_seed(other.m_seed),
+      m_seedlen(other.m_seedlen), m_description(std::move(other.m_description)),
+      m_id(other.m_id) {
+    other.m_seed = nullptr;
+    other.m_seedlen = 0;
+    other.m_id = -1;
+}
+/*
 template <typename CharT>
 Password<CharT>::Password(const Password<CharT> & other):
         m_service(other.m_service),
@@ -99,4 +107,6 @@ template <typename CharT> const uchar *Password<CharT>::getSeed() const {
 
 template <typename CharT>
 std::string
-Password<CharT>::cook(const std::basic_string_view<CharT> &passwd) const {}
+Password<CharT>::cook(const std::basic_string_view<CharT> &passwd) const {
+    return "YEP COOK";
+}
