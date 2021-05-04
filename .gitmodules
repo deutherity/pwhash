@@ -4,3 +4,6 @@
 [submodule "findconfdir"]
 	path = findconfdir
 	url = https://github.com/deutherity/findconfdir
+[submodule "password"]
+	path = password
+	url = ./password

@@ -1,4 +1,3 @@
-#include "Password.hpp"
 #include "crash.hpp"
 #include "findconfdir.hpp"
 #include "templates.hpp"
@@ -11,16 +10,15 @@ namespace fs = std::filesystem;
 template <typename CharT> using passvec = std::vector<Password<CharT>>;
 
 template <typename CharT = char> passvec<CharT> readconf() {
+    fs::path p;
     using res_t = passvec<CharT>;
-    std::string confdir;
     try {
-        confdir = findconfdir();
+        p = findconfdir();
     } catch (const int &e) {
         crash("Config directory is corrupted");
     }
 
     res_t res;
-    fs::path p(confdir);
     p /= "pwdb.txt";
     if (!fs::exists(p)) {
         std::fstream fi(p.string(), std::fstream::out);
@@ -34,9 +32,13 @@ template <typename CharT = char> passvec<CharT> readconf() {
         crash("Failed to open data");
 
     Password<CharT> foo;
+    res.reserve(7);
     while (!fi.eof()) {
         fi >> foo;
-        res.push_back(std::move(foo));
+        if (foo.valid()) {
+            res.push_back(std::move(foo));
+        }
     }
+    fi.close();
     return res;
 }
