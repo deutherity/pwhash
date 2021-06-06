@@ -6,6 +6,4 @@
 	url = https://github.com/deutherity/findconfdir
 [submodule "password"]
 	path = password
-	url = ./password
-[submodule "./password/"]
 	url = https://github.com/deutherity/password
