@@ -5,11 +5,11 @@
 #include <fstream>
 #include <memory>
 #include <vector>
-namespace fs = std::filesystem;
 
 template <typename CharT> using passvec = std::vector<Password<CharT>>;
 
 template <typename CharT = char> passvec<CharT> readconf() {
+    namespace fs = std::filesystem;
     fs::path p;
     using res_t = passvec<CharT>;
     try {
@@ -35,9 +35,11 @@ template <typename CharT = char> passvec<CharT> readconf() {
     res.reserve(7);
     while (!fi.eof()) {
         fi >> foo;
-        if (foo.valid()) {
+        if (foo.m_id != -1)
+        {
             res.push_back(std::move(foo));
         }
+        
     }
     fi.close();
     return res;

@@ -1,0 +1,1 @@
+char clipcopy(const char* text);
