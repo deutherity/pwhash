@@ -1,3 +1,4 @@
+#pragma once
 #include "crash.hpp"
 #include "findconfdir.hpp"
 #include "templates.hpp"

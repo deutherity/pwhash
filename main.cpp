@@ -19,7 +19,7 @@ int getpwd(argvec & args, const char * passwd, std::string confpath);
 
 void gennew(const argvec& argv);
 void usepwd(const argvec& argv);
-
+void entrydel(const argvec &argv);
 
 
 
@@ -58,6 +58,13 @@ int main(int argc, char const *argv[])
         usepwd(args);
         return 0;
     }
+
+   if (less_or_eq(argv[1], "delete"))
+   {
+       entrydel(args);
+       return 0;
+   }
+
 
     printhelp();
 

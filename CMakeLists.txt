@@ -10,6 +10,7 @@ set(SOURCES
     util.cpp
     main.cpp
     usepwd.cpp
+    deleteentry.cpp
 )
 
 add_compile_options(-g)
