@@ -36,11 +36,9 @@ template <typename CharT = char> passvec<CharT> readconf() {
     res.reserve(7);
     while (!fi.eof()) {
         fi >> foo;
-        if (foo.m_id != -1)
-        {
+        if (foo.m_id != -1) {
             res.push_back(std::move(foo));
         }
-        
     }
     fi.close();
     return res;

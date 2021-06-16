@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
 #include <string_view>
+#include <vector>
 #define CONFFILE "pwdb.conf"
 #include <cstddef>
 #define SALTLEN 256

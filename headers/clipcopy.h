@@ -1,2 +1,2 @@
 #pragma once
-char clipcopy(const char* text);
+char clipcopy(const char *text);
